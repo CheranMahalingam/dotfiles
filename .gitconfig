@@ -5,10 +5,19 @@
   editor = nvim
 
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
 
-[mergetool "vimdiff"]
+[mergetool "nvimdiff"]
   path = nvim
+
+[diff]
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  path = nvim
+
+[difftool]
+  prompt = false
 
 [include]
   path = ~/.gitconfig.local

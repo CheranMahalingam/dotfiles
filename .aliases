@@ -1,0 +1,11 @@
+alias rm="rm -r"
+
+alias map="xargs -n1"
+
+alias lg="lazygit"
+alias lzd="lazydocker"
+
+alias wiki="cd $HOME/vimwiki; nvim -c ':VimwikiIndex'"
+
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+

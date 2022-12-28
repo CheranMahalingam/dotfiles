@@ -45,11 +45,15 @@ install_zsh() {
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 }
 
+# ohmyzsh must be installed first
 install_fzf() {
   info "Installing fzf..."
 
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install -all
+
+  # Install fzf-tab zsh plugin
+  git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 }
 
 reload_config() {

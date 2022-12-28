@@ -1,0 +1,15 @@
+[user]
+  # Set in .gitconfig.local
+
+[core]
+  editor = nvim
+
+[merge]
+  tool = vimdiff
+
+[mergetool "vimdiff"]
+  path = nvim
+
+[include]
+  path = ~/.gitconfig.local
+

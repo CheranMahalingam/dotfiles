@@ -1,5 +1,10 @@
 local M = {
   "mfussenegger/nvim-dap",
+
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope-dap.nvim",
+  },
 }
 
 function M.config()
@@ -59,6 +64,8 @@ function M.config()
       justMyCode = false,
     },
   }
+
+  require("telescope").load_extension("dap")
 
   vim.fn.sign_define('DapBreakpoint', {text='', texthl='debugBreakpoint', linehl='', numhl=''})
   vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='debugBreakpointCondition', linehl='', numhl=''})

@@ -4,7 +4,6 @@ local M = {
 
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "nvim-telescope/telescope-dap.nvim" },
   },
 }
 
@@ -96,9 +95,6 @@ function M.config()
       buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     },
   })
-
-  -- telescope.load_extension("vimwiki")
-  telescope.load_extension("dap")
 end
 
 return M

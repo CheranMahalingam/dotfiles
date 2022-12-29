@@ -18,6 +18,9 @@ install_nvim() {
   tar xzvf nvim-linux64.tar.gz
   sudo mv nvim-linux64/bin/nvim /usr/local/bin/
   rm -r nvim-linux64
+
+  # Install dependencies for markdown-preview.nvim
+  nvim +"call mkdp#util#install()" +qall
 }
 
 install_tmux() {

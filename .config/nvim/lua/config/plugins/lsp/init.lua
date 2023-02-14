@@ -23,6 +23,7 @@ function M.config()
     metals = {},
     jsonls = {},
     yamlls = {},
+    rust_analyzer = {},
   }
 
   function on_attach(client, bufnr)

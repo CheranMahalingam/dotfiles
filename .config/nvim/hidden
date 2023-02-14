@@ -1,0 +1,697 @@
+source $HOME/.config/nvim/vim-plug/plugins.vim
+
+lua require('impatient')
+
+set statusline+=%{get(b:,'gitsigns_status','')}
+
+set relativenumber
+set hlsearch
+syntax on
+
+set cino=N-s,g0,l1
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set signcolumn=yes
+
+set hidden
+
+set undodir=~/.vimdid
+set undofile
+
+set textwidth=80
+set formatoptions-=t
+
+let mapleader = " "
+let localleader = "\\"
+inoremap jj <Esc>
+snoremap jj <Esc>
+
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+
+nnoremap <leader>x :bd!<CR>
+
+nnoremap <leader>o o<ESC>
+nnoremap <leader>O O<ESC>
+
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-i> <C-i>zz
+
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
+
+nnoremap <silent> <C-Up> :resize -5<CR>
+nnoremap <silent> <C-Down> :resize +5<CR>
+nnoremap <silent> <C-Left> :vertical resize -5<CR>
+nnoremap <silent> <C-Right> :vertical resize +5<CR>
+
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>fg <cmd>Telescope live_grep<CR>
+nnoremap <leader>fb <cmd>Telescope buffers<CR>
+nnoremap <leader>fs <cmd>Telescope grep_string<CR>
+" nnoremap <leader>gc <cmd>Telescope git_commits<CR>
+" nnoremap <leader>gb <cmd>Telescope git_bcommits<CR>
+" nnoremap <leader>gs <cmd>Telescope git_status<CR>
+" nnoremap <leader>df <cmd>Telescope dap frames<CR>
+" nnoremap <leader>dB <cmd>Telescope dap list_breakpoints<CR>
+" nnoremap <leader>dv <cmd>Telescope dap variables<CR>
+
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string()<CR>
+" nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<CR>
+" nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_bcommits()<CR>
+" nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<CR>
+
+nnoremap <leader>vw <cmd>lua require('telescope').extensions.vimwiki.vimwiki()<CR>
+nnoremap <leader>vg <cmd>lua require('telescope').extensions.vw.live_grep()<CR>
+
+noremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" switch to normal mode in terminal
+tnoremap jj <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
+let g:floaterm_keymap_toggle = '<leader>tt'
+let g:floaterm_autohide = 0
+let g:floaterm_autoinsert = 'false'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+let g:mkdp_theme = 'dark'
+let g:mkdp_auto_close = 0
+nnoremap <leader>mp <Plug>MarkdownPreviewToggle
+
+nnoremap <leader>t\ :FloatermNew --wintype=vsplit --width=0.5 --position=rightbelow<CR>
+nnoremap <leader>t- :FloatermNew --wintype=split --height=0.5 --position=rightbelow<CR>
+
+" nnoremap <leader>db :lua require'dap'.toggle_breakpoint()<CR>
+" nnoremap <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>
+" nnoremap <leader>di :lua require'dap'.step_into()<CR>
+" nnoremap <leader>dn :lua require'dap'.step_over()<CR>
+" nnoremap <leader>dI :lua require'dap'.step_out()<CR>
+" nnoremap <leader>ds :lua require'dap'.terminate()<CR>
+" nnoremap <leader>dc :lua require'dap'.continue()<CR>
+" nnoremap <leader>dC :lua require'dap'.clear_breakpoints()<CR>
+" " nnoremap <leader>dn :lua require'dap'.run_to_cursor()<CR>
+" nnoremap <leader>dk :lua require'dap'.up()<CR>
+" nnoremap <leader>dj :lua require'dap'.down()<CR>
+" nnoremap <leader>dr :lua require'dap'.repl.open({}, 'botright 60vsplit')<CR><C-w>li
+" nnoremap <leader>dl :lua last_run['cache']="true";require'dap'.run_last()<CR>
+" nnoremap <leader>dx :lua require'dap.ui.widgets'.hover()<CR>
+autocmd FileType dap-float nnoremap <buffer><silent> j <cmd>close!<CR>
+
+nnoremap <silent> <leader>ve :e $MYVIMRC<CR>
+nnoremap <silent> <leader><leader> :source $MYVIMRC<CR>
+
+nnoremap <silent> <leader>re :noh<CR>
+
+let g:auto_session_create_enabled = 0
+
+set termguicolors
+
+if has("autocmd")
+  au BufReadPost * if line("'\'") > 0 && line("'\'") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+au FileType dap-repl lua require('dap.ext.autocompl').attach()
+
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+set completeopt=menu,menuone,noselect
+
+lua << END
+local kind_icons = {
+  Text = "",
+  Method = "m",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+}
+
+require('tokyonight').setup {
+  style = "night",
+  styles = {
+    comments = { italic = false },
+    keywords = { italic = false },
+    functions = {}
+  },
+  on_colors = function(colors)
+    colors.bg = "#11121d"
+    colors.blue1 = "#f7768e"
+  end
+}
+vim.cmd[[colorscheme tokyonight-night]]
+
+require('gitsigns').setup {
+  on_attach = function(bufnr)
+    local function map(mode, lhs, rhs, opts)
+        opts = vim.tbl_extend('force', {noremap = true, silent = true}, opts or {})
+        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+    end
+  end
+}
+
+-- require("luasnip.loaders.from_vscode").lazy_load()
+
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+local check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-3), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(3), { "i", "c" }),
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ["<C-e>"] = cmp.mapping {
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    },
+    -- Accept currently selected item. If none selected, `select` first item.
+    -- Set `select` to `false` to only confirm explicitly selected items.
+    ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif check_backspace() then
+        fallback()
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        luasnip = "[Snippet]",
+      })[entry.source.name]
+      return vim_item
+    end,
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  },
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
+  },
+  window = {
+    documentation = {
+      bordered = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
+    },
+  },
+  experimental = {
+    ghost_text = false,
+    native_menu = false,
+  },
+}
+
+local config = {
+  virtual_text = false
+}
+vim.diagnostic.config(config)
+
+local servers = {
+  gopls = {},
+  clangd = {},
+  pyright = {},
+  tsserver = {},
+}
+
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap('n', '<leader>tw', '<cmd>TroubleToggle workspace_diagnostics<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>td', '<cmd>TroubleToggle document_diagnostics<CR>', opts)
+
+local function on_attach(client, bufnr)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Trouble lsp_references<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gy', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local options = {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
+
+local lsp_installer_servers = require "nvim-lsp-installer.servers"
+
+for server_name, _ in pairs(servers) do
+    local server_available, server = lsp_installer_servers.get_server(server_name)
+
+  if server_available then
+    server:on_ready(function()
+      local opts = vim.tbl_deep_extend("force", options, servers[server.name] or {})
+      server:setup(opts)
+    end)
+
+    if not server:is_installed() then
+      server:install()
+    end
+  end
+end
+
+require('nvim-tree').setup {
+  view = {
+    mappings = {
+      list = {
+        { key = {"<S-RIGHT>"}, action = "vsplit", mode = "n" },
+        { key = {"<S-DOWN>"}, action = "split", mode = "n" }
+      }
+    }
+  },
+  git = {
+    enable = true,
+    ignore = false
+  },
+  renderer = {
+    highlight_opened_files = "none",
+    highlight_git = false
+  },
+  respect_buf_cwd
+}
+
+require('Comment').setup()
+
+local actions = require "telescope.actions"
+local action_layout = require("telescope.actions.layout")
+
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-c>"] = actions.close,
+        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+        ["<C-u>"] = actions.preview_scrolling_up,
+        ["<C-d>"] = actions.preview_scrolling_down,
+        ["<M-p>"] = action_layout.toggle_preview,
+        ["<M-w>"] = actions.delete_buffer,
+      },
+      n = {
+        ["<esc>"] = actions.close,
+        ["<CR>"] = actions.select_default,
+        ["<C-x>"] = actions.select_horizontal,
+        ["<C-v>"] = actions.select_vertical,
+        ["<C-t>"] = actions.select_tab,
+
+        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+
+        ["j"] = actions.move_selection_next,
+        ["k"] = actions.move_selection_previous,
+        ["H"] = actions.move_to_top,
+        ["M"] = actions.move_to_middle,
+        ["L"] = actions.move_to_bottom,
+
+        ["gg"] = actions.move_to_top,
+        ["G"] = actions.move_to_bottom,
+
+        ["<C-u>"] = actions.preview_scrolling_up,
+        ["<C-d>"] = actions.preview_scrolling_down,
+        ["<M-p>"] = action_layout.toggle_preview,
+        ["<M-w>"] = actions.delete_buffer,
+      },
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      },
+    prompt_prefix = "   ",
+    selection_caret = "  ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "ascending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        preview_width = 0.55,
+        results_width = 0.8,
+      },
+      vertical = {
+        mirror = false,
+      },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
+    },
+    file_sorter = require("telescope.sorters").get_fuzzy_file,
+    file_ignore_patterns = { "node_modules" },
+    generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+    path_display = { "truncate" },
+    winblend = 0,
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    color_devicons = true,
+    use_less = true,
+    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+    buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+  }
+}
+
+-- require('telescope').load_extension('vimwiki')
+
+-- require('session-lens').setup {
+--   path_display={'shorten'},
+--   previewer = false
+-- }
+
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
+require('telescope').load_extension('dap')
+
+vim.fn.sign_define('DapBreakpoint', {text='', texthl='debugBreakpoint', linehl='', numhl=''})
+vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='debugBreakpointCondition', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='', linehl='debugPC', numhl=''})
+
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      node_incremental = ";",
+      node_decremental = ".",
+    },
+  },
+}
+
+local hydra = require('hydra')
+local cmd = require('hydra.keymap-util').cmd
+local dap = require('dap')
+local dap_ui = require('dap.ui.widgets')
+local gitsigns = require('gitsigns')
+local diffview = require('diffview')
+
+local dap_hint = [[
+ ^ ^ Navigation      ^ ^     Action           ^ ^       UI      
+ ^-^--------------   ^-^-------------------   ^-^----------------- 
+ _i_: step into     _b_: toggle breakpoint   _o_: open repl 
+ _I_: step out      _B_: conditional         _e_: eval
+ _n_: step over     _c_: continue            _f_: frames
+ _u_: prev frame ↑   _C_: clear breakpoints   _v_: variables
+ _d_: next frame ↓   _r_: run to cursor       _L_: list breakpoints 
+ ^ ^                 _x_: terminate
+
+ _q_: quit
+]]
+
+hydra({
+  name = 'dap',
+  hint = dap_hint,
+  config = {
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      type = 'window',
+      border = 'rounded',
+    },
+  },
+  mode = {'n'},
+  body = '<leader>d',
+  heads = {
+    {'I', dap.step_out, { desc = 'step out' }},
+    {'n', dap.step_over, { desc = 'step over' }},
+    {'i', dap.step_into, { desc = 'step into' }},
+    {'b', dap.toggle_breakpoint, { desc = 'toggle breakpoint' }},
+    {'B', function()
+      dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+    end, { desc = 'conditional breakpoint' }},
+    {'C', dap.clear_breakpoints, { desc = 'clear breakpoints' }},
+    {'c', dap.continue, { desc = 'continue' }},
+    {'x', dap.terminate, { desc = 'terminate' }},
+    {'r', dap.run_to_cursor, { desc = 'run to cursor' }},
+    {'o', cmd "lua require'dap'.repl.open({}, 'botright 60vsplit')<CR><C-w>li", { exit = true, desc = 'open repl' }},
+    {'d', dap.down, { desc = 'next frame' }},
+    {'u', dap.up, { desc = 'prev frame' }},
+    {'e', dap_ui.hover, { desc = 'eval' }},
+    {'f', cmd 'Telescope dap frames', { desc = 'frames' }},
+    {'v', cmd 'Telescope dap variables', { desc = 'variables' }},
+    {'L', cmd 'Telescope dap list_breakpoints', { desc = 'list breakpoints' }},
+    {'q', nil, { exit = true, nowait = true, desc = 'quit' }}
+  }
+})
+
+local git_hint = [[
+ ^ ^    DiffView       ^ ^               Actions                  ^ ^ Telescope
+ ^-^----------------   ^-^-----------------^-^-----------------   ^-^---------------
+ _h_: file history     _n_: next hunk      _u_: undo stage hunk   _L_: commit log
+ _H_: branch history   _p_: prev hunk      _b_: blame line        _v_: list branches 
+ _o_: staged diff      _s_: stage hunk     _B_: blame full
+ _O_: diff revision    _S_: stage buffer   _d_: toggle deleted
+ _c_: close diff
+
+ _q_: quit
+]]
+
+hydra({
+  name = 'git',
+  hint = git_hint,
+  config = {
+    buffer = bufnr,
+    color = 'pink',
+    invoke_on_body = true,
+    hint = {
+      type = 'window',
+      border = 'rounded',
+    },
+    on_enter = function()
+      vim.cmd 'mkview'
+      vim.cmd 'silent! %foldopen!'
+      vim.bo.modifiable = false
+      gitsigns.toggle_signs(true)
+      gitsigns.toggle_linehl(true)
+    end,
+    on_exit = function()
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      vim.cmd 'loadview'
+      vim.api.nvim_win_set_cursor(0, cursor_pos)
+      vim.cmd 'normal zv'
+      gitsigns.toggle_signs(false)
+      gitsigns.toggle_linehl(false)
+      gitsigns.toggle_deleted(false)
+    end,
+  },
+  mode = {'n', 'x'},
+  body = '<leader>g',
+  heads = {
+    {'n', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gitsigns.next_hunk() end)
+      return '<Ignore>'
+     end, { expr = true, desc = 'next hunk' }},
+    {'p', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gitsigns.prev_hunk() end)
+      return '<Ignore>'
+    end, { expr = true, desc = 'prev hunk' }},
+    {'s', cmd 'Gitsigns stage_hunk', { desc = 'stage hunk' }},
+    {'S', gitsigns.stage_buffer, { desc = 'stage buffer' }},
+    {'u', gitsigns.undo_stage_hunk, { desc = 'undo stage' }},
+    {'d', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' }},
+    {'b', gitsigns.blame_line, { desc = 'blame' }},
+    {'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame full' }},
+    {'c', cmd 'DiffviewClose', { desc = 'close diff' }},
+    {'h', cmd 'DiffviewFileHistory %', { exit = true, desc = 'file history' }},
+    {'H', cmd 'DiffviewFileHistory', { exit = true, desc = 'branch history' }},
+    {'o', cmd 'DiffviewOpen', { exit = true, desc = 'curr diff' }},
+    {'O', function()
+      local rev = vim.fn.input('Revision: ')
+      vim.cmd('DiffviewOpen ' .. rev)
+    end, { exit = true, desc = 'diff rev' }},
+    {'L', cmd 'Telescope git_commits', { desc = 'list commits' }},
+    {'v', cmd 'Telescope git_branches', { desc = 'list branches' }},
+    {'q', nil, { exit = true, nowait = true, desc = 'quit' }}
+  }
+})
+
+require('lualine').setup {
+  options = {
+    theme = 'tokyonight',
+    component_separators = '|',
+    section_separators = { left = '', right = '' },
+  },
+  sections = {
+    lualine_a = {
+      { 'mode', separator = { left = '' }, right_padding = 2 },
+    },
+    lualine_b = { 'filename', 'branch', 'diagnostics' },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = { 'filetype', 'progress' },
+    lualine_z = {
+      { 'location', separator = { right = '' }, left_padding = 2 },
+    },
+  },
+  inactive_sections = {
+    lualine_a = { 'filename' },
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = { 'location' },
+  },
+  tabline = {},
+  extensions = { 'nvim-tree' },
+}
+
+-- require'clipboard-image'.setup {
+--   default = {
+--     img_dir = "~/vimwiki/assets",
+--     img_dir_txt = "~/vimwiki/assets",
+--     affix = "![](%s)",
+--     img_name = function ()
+--       vim.fn.inputsave()
+--       local name = vim.fn.input('Name: ')
+--       vim.fn.inputrestore()
+--
+--       if name == nil or name == '' then
+--         return os.date('%y-%m-%d-%H-%M-%S')
+--       end
+--       return name
+--     end,
+--     img_handler = function (img)
+--       vim.cmd("normal! f[")
+--       vim.cmd("normal! a" .. img.name)
+--     end
+--   }
+-- }
+
+local dap = require('dap')
+last_run = {}
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = '/usr/local/src/cpp-tools/extension/debugAdapters/bin/OpenDebugAD7',
+}
+dap.configurations.cpp = {
+  {
+    name = "Launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function ()
+      if last_run['cache'] == "true" then 
+        return last_run['program']
+      end
+      local input = vim.fn.input('Executable Path: ', vim.fn.getcwd() .. '/', 'file')
+      if input == vim.fn.getcwd() .. '/' then
+        return last_run['program']
+      else
+        last_run['program'] = input
+        return input
+      end
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+    -- args = function ()
+    --   if last_run['cache'] == "true" then
+    --     return last_run['args']
+    --   end
+    --   local input = vim.fn.input('Executable Args: ')
+    --   if input == '' or input == nil then
+    --     return last_run['args']
+    --   else
+    --     last_run['args'] = vim.split(input, " ")
+    --     return vim.split(input, " ")
+    --   end
+    -- end,
+  }
+}
+dap.configurations.c = dap.configurations.cpp
+
+END
+

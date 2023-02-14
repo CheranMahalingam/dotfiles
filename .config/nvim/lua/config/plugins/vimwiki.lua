@@ -10,7 +10,7 @@ local M = {
 
 function M.init()
   local create_note = function()
-    local filename = os.getenv("HOME") .. "/vimwiki/" .. vim.fn.input("Note: ") .. ".md"
+    local filename = os.getenv("HOME") .. "/vimwiki/" .. vim.fn.input("Create note: ") .. ".md"
     local file = io.open(filename, "w")
     if file ~= nil then
       file:close()

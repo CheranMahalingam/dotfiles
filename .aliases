@@ -5,7 +5,8 @@ alias map="xargs -n1"
 alias lg="lazygit"
 alias lzd="lazydocker"
 
-alias wiki="cd $HOME/vimwiki; nvim -c ':VimwikiIndex'"
+alias wiki="nvim -c ':VimwikiIndex'"
 
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+alias nvim="/usr/local/src/nvim-linux64/bin/nvim"

@@ -7,18 +7,23 @@
 [merge]
   tool = nvimdiff
 
-[mergetool "nvimdiff"]
-  path = nvim
+[mergetool]
+  prompt = false
+	trustExitCode = true
 
 [diff]
   tool = nvimdiff
 
-[difftool "nvimdiff"]
-  path = nvim
-
 [difftool]
   prompt = false
+	trustExitCode = true
 
 [include]
   path = ~/.gitconfig.local
+
+[difftool "nvimdiff"]
+  cmd = nvim -f -c \"DiffviewOpen\"
+
+[mergetool "nvimdiff"]
+  cmd = nvim -f -c \"DiffviewOpen\"
 

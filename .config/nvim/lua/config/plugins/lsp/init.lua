@@ -6,6 +6,7 @@ local M = {
     "hrsh7th/cmp-nvim-lsp",
     "folke/trouble.nvim",
     "nvim-telescope/telescope.nvim",
+    "SmiteshP/nvim-navic"
   },
 }
 

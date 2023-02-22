@@ -26,4 +26,5 @@ vim.opt.cino = "N-s,g0,l1"
 vim.opt.splitbelow = true -- new windows below current
 vim.opt.splitright = true -- new windows right of current
 vim.opt.textwidth = 80
+vim.opt.updatetime = 200
 

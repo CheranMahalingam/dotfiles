@@ -1,7 +1,7 @@
 local M = {
   "williamboman/mason.nvim",
-  event = "BufReadPre",
 
+  lazy = false,
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
@@ -10,7 +10,10 @@ local M = {
 function M.config()
   require("mason").setup({})
   require("mason-lspconfig").setup({
-    automatic_installation = true,
+    ensure_installed = {
+      "gopls", "pyright", "clangd", "cmake", "tsserver", "bashls",
+      "dockerls", "jsonls", "yamlls", "rust_analyzer", "lua_ls"
+    },
   })
 end
 

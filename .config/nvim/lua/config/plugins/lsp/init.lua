@@ -25,6 +25,7 @@ function M.config()
     jsonls = {},
     yamlls = {},
     rust_analyzer = {},
+    lua_ls = {},
   }
 
   function on_attach(client, bufnr)

@@ -10,10 +10,8 @@ local M = {
 function M.config()
   require("mason").setup({})
   require("mason-lspconfig").setup({
-    ensure_installed = {
-      "gopls", "pyright", "clangd", "cmake", "tsserver", "bashls",
-      "dockerls", "jsonls", "yamlls", "rust_analyzer", "lua_ls"
-    },
+    ensure_installed = {},
+    automatic_installation = false,
   })
 end
 

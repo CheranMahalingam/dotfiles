@@ -1,6 +1,10 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+
+  dependencies = {
+    "folke/tokyonight.nvim",
+  },
+  lazy = false,
 }
 
 function M.config()

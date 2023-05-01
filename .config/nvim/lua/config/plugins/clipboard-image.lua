@@ -28,7 +28,7 @@ function M.config()
 end
 
 function M.init()
-  vim.keymap.set("n", "<leader>p", "<cmd>PasteImg<cr>")
+  -- vim.keymap.set("n", "<leader>p", "<cmd>PasteImg<cr>")
 end
 
 return M

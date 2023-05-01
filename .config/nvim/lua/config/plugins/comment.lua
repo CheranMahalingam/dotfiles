@@ -4,6 +4,5 @@ return {
   config = function()
     require("Comment").setup()
   end,
-
-  event = "BufReadPre",
+  lazy = false,
 }

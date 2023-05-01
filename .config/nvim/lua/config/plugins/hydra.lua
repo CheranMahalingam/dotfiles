@@ -63,7 +63,7 @@ function M.config()
       {'C', dap.clear_breakpoints, { desc = 'clear breakpoints' }},
       {'c', dap.continue, { desc = 'continue' }},
       {'x', dap.terminate, { desc = 'terminate' }},
-      {'o', cmd "lua require'dap'.repl.open({}, 'botright 60vsplit')<cr><C-w>li", { exit = true, desc = 'open repl' }},
+      {'o', cmd "lua require'dap'.repl.open({}, 'botright 60vsplit')<cr><C-w>li", { desc = 'open repl' }},
       {'d', dap.down, { desc = 'next frame' }},
       {'u', dap.up, { desc = 'prev frame' }},
       {'e', dap_ui.hover, { desc = 'eval' }},

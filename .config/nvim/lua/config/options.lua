@@ -28,3 +28,5 @@ vim.opt.splitright = true -- new windows right of current
 vim.opt.textwidth = 80
 vim.opt.updatetime = 200
 
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+

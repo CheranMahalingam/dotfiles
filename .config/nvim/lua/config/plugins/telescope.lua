@@ -4,34 +4,38 @@ local M = {
 
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "folke/trouble.nvim",
   },
 }
 
 function M.config()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
-  local action_layout = require("telescope.actions.layout")
+  local trouble = require("trouble.providers.telescope")
 
   telescope.setup({
     defaults = {
       mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
+          ["<C-x>"] = actions.select_horizontal,
+          ["<C-v>"] = actions.select_vertical,
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-c>"] = actions.close,
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           ["<C-u>"] = actions.preview_scrolling_up,
           ["<C-d>"] = actions.preview_scrolling_down,
-          ["<M-p>"] = action_layout.toggle_preview,
-          ["<M-w>"] = actions.delete_buffer,
+          ["<M-d>"] = actions.delete_buffer,
+
+          ["<C-q>"] = actions.send_selected_to_qflist,
+          ["<C-t>"] = trouble.open_with_trouble,
         },
         n = {
           ["<Esc>"] = actions.close,
           ["<CR>"] = actions.select_default,
           ["<C-x>"] = actions.select_horizontal,
           ["<C-v>"] = actions.select_vertical,
-          ["<C-t>"] = actions.select_tab,
 
           ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
           ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -47,8 +51,10 @@ function M.config()
 
           ["<C-u>"] = actions.preview_scrolling_up,
           ["<C-d>"] = actions.preview_scrolling_down,
-          ["<M-p>"] = action_layout.toggle_preview,
-          ["<M-w>"] = actions.delete_buffer,
+          ["<M-d>"] = actions.delete_buffer,
+
+          ["<C-q>"] = actions.send_selected_to_qflist,
+          ["<C-t>"] = trouble.open_with_trouble,
         },
       },
       vimgrep_arguments = {

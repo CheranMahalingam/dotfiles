@@ -1,6 +1,9 @@
 local M = {
   "rmagatti/auto-session",
   lazy = false,
+  dependencies = {
+    { "nvim-tree/nvim-tree.lua" },
+  },
 }
 
 function M.config()

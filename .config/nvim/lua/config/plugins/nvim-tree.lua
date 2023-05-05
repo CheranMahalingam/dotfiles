@@ -22,6 +22,12 @@ end
 function M.config()
   require("nvim-tree").setup({
     on_attach = on_attach,
+    sync_root_with_cwd = true,
+    actions = {
+      change_dir = {
+        global = true
+      }
+    },
   })
 end
 

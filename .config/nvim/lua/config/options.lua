@@ -8,6 +8,7 @@ vim.keymap.set = function(mode, lhs, rhs, opts)
   return keymap_set(mode, lhs, rhs, opts)
 end
 
+vim.o.background = "dark"
 vim.opt.spell = true
 vim.g.mapleader = " "
 vim.opt.expandtab = true -- use spaces instead of tab
@@ -27,6 +28,7 @@ vim.opt.splitbelow = true -- new windows below current
 vim.opt.splitright = true -- new windows right of current
 vim.opt.textwidth = 80
 vim.opt.updatetime = 200
+vim.opt.swapfile = false
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 

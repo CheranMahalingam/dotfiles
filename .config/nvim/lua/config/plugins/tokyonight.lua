@@ -8,6 +8,7 @@ function M.config()
   local tokyonight = require("tokyonight")
   tokyonight.setup({
     style = "night",
+    light_style = "day",
     styles = {
       comments = { italic = false },
       keywords = { italic = false },

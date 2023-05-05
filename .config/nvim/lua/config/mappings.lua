@@ -27,3 +27,7 @@ vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j")
 vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k")
 vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
+vim.keymap.set("n", "<leader>tc", function()
+    vim.o.background = vim.o.background == "dark" and "light" or "dark"
+  end)
+

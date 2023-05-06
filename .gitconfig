@@ -2,28 +2,23 @@
   # Set in .gitconfig.local
 
 [core]
-  editor = nvim
+    pager = delta
 
 [merge]
-  tool = nvimdiff
-
-[mergetool]
-  prompt = false
-	trustExitCode = true
+    conflictstyle = diff3
 
 [diff]
-  tool = nvimdiff
-
-[difftool]
-  prompt = false
-	trustExitCode = true
+    colorMoved = default
 
 [include]
   path = ~/.gitconfig.local
 
-[difftool "nvimdiff"]
-  cmd = nvim -f -c \"DiffviewOpen\"
+[interactive]
+    diffFilter = delta --color-only
 
-[mergetool "nvimdiff"]
-  cmd = nvim -f -c \"DiffviewOpen\"
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    line-numbers = true
+    side-by-side = true
 

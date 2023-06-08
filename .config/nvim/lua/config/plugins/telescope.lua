@@ -65,7 +65,7 @@ function M.config()
         "--line-number",
         "--column",
         "--smart-case",
-        },
+      },
       prompt_prefix = "   ",
       selection_caret = "  ",
       entry_prefix = "  ",

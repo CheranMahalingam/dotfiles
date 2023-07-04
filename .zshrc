@@ -2,8 +2,7 @@ ZSH_THEME="darkblood"
 
 plugins=(
   git
-  zsh-autosuggestions
-  virtualenv)
+  zsh-autosuggestions)
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
@@ -43,3 +42,7 @@ eval "$(register-python-argcomplete conda)"
 # <<< conda initialize <<<
 
 source <(kubectl completion zsh)
+
+if [ -d "/usr/local/go/bin" ] ; then
+    PATH="$PATH:/usr/local/go/bin"
+fi

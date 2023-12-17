@@ -3,7 +3,8 @@ local M = {
   event = "VeryLazy",
   
   dependencies = {
-    { "mfussenegger/nvim-dap" },
+    "mfussenegger/nvim-dap",
+    "nvim-telescope/telescope.nvim",
   },
 }
 
@@ -28,10 +29,10 @@ function M.config()
   ]]
 
   local git_hint = [[
-   ^ ^    DiffView       ^ ^               Actions                  ^ ^ Telescope
-   ^-^----------------   ^-^-----------------^-^-----------------   ^-^---------------
-   _h_: file history     _n_: next hunk      _u_: undo stage hunk   _L_: commit log
-   _H_: branch history   _p_: prev hunk      _b_: blame line        _v_: list branches 
+   ^ ^    DiffView       ^ ^               Actions               
+   ^-^----------------   ^-^-----------------^-^-----------------
+   _h_: file history     _n_: next hunk      _u_: undo stage hunk
+   _H_: branch history   _p_: prev hunk      _b_: blame line     
    _o_: staged diff      _s_: stage hunk     _B_: blame full
    _O_: diff revision    _S_: stage buffer   _d_: toggle deleted
    _c_: close diff
@@ -86,15 +87,15 @@ function M.config()
         border = 'rounded',
       },
       on_enter = function()
-        vim.cmd 'mkview'
-        vim.cmd 'silent! %foldopen!'
+        -- vim.cmd 'mkview'
+        -- vim.cmd 'silent! %foldopen!'
         vim.bo.modifiable = false
         gitsigns.toggle_signs(true)
         gitsigns.toggle_linehl(true)
       end,
       on_exit = function()
         local cursor_pos = vim.api.nvim_win_get_cursor(0)
-        vim.cmd 'loadview'
+        -- vim.cmd 'loadview'
         vim.api.nvim_win_set_cursor(0, cursor_pos)
         vim.cmd 'normal zv'
         gitsigns.toggle_signs(false)
@@ -115,7 +116,16 @@ function M.config()
         vim.schedule(function() gitsigns.prev_hunk() end)
         return '<Ignore>'
       end, { expr = true, desc = 'prev hunk' }},
-      {'s', cmd 'Gitsigns stage_hunk', { desc = 'stage hunk' }},
+      {'s', function()
+        local mode = vim.api.nvim_get_mode().mode:sub(1,1)
+        if mode == 'V' then -- visual-line mode
+          local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
+           vim.api.nvim_feedkeys(esc, 'x', false) -- exit visual mode
+           vim.cmd("'<,'>Gitsigns stage_hunk")
+        else
+          vim.cmd("Gitsigns stage_hunk")
+        end
+      end, { desc = 'stage hunk' }},
       {'S', gitsigns.stage_buffer, { desc = 'stage buffer' }},
       {'u', gitsigns.undo_stage_hunk, { desc = 'undo stage' }},
       {'d', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' }},
@@ -126,11 +136,22 @@ function M.config()
       {'H', cmd 'DiffviewFileHistory', { exit = true, desc = 'branch history' }},
       {'o', cmd 'DiffviewOpen', { exit = true, desc = 'curr diff' }},
       {'O', function()
-        local rev = vim.fn.input('Revision: ')
-        vim.cmd('DiffviewOpen ' .. rev)
+        local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
+        local builtin = require("telescope.builtin")
+
+        local opts = {
+          attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              vim.cmd('DiffviewOpen ' .. selection.value)
+            end)
+            return true
+          end,
+        }
+        builtin.git_commits(opts)
       end, { exit = true, desc = 'diff rev' }},
-      {'L', cmd 'Telescope git_commits', { desc = 'list commits' }},
-      {'v', cmd 'Telescope git_branches', { desc = 'list branches' }},
       {'q', nil, { exit = true, nowait = true, desc = 'quit' }}
     }
   })

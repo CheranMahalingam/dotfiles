@@ -15,7 +15,6 @@ function M.config()
 
   local servers = {
     gopls = {},
-    pyright = {},
     clangd = {},
     cmake = {},
     tsserver = {},
@@ -26,6 +25,8 @@ function M.config()
     yamlls = {},
     rust_analyzer = {},
     lua_ls = {},
+    pylsp = {},
+    marksman = {},
   }
 
   function on_attach(client, bufnr)

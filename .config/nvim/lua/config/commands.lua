@@ -24,3 +24,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank {}")
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "markdown" },
+  callback = function()
+    vim.cmd("set tw=80 wrap")
+  end,
+})
+

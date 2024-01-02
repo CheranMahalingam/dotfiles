@@ -4,9 +4,7 @@ My collection of config files tested primarily on WSL2 and Ubuntu systems
 ## Installation
 1. Clone the dotfiles repository.
 ```
-$ cd ~
-$ git clone https://github.com/CheranMahalingam/dotfiles.git
-$ cd dotfiles
+$ git clone --separate-git-dir=$HOME/.dotfiles https://github.com/CheranMahalingam/.dotfiles.git tmpdotfiles
 ```
 2. Sync config files.
 ```

@@ -13,14 +13,14 @@ sync() {
 install_nvim() {
   info "Installing neovim..."
 
-  # Install nvim 0.8.1 from a tarball
-  wget https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.tar.gz
+  # Install neovim from a tarball
+  wget https://github.com/neovim/neovim/releases/download/v0.9.0/nvim-linux64.tar.gz
   tar xzvf nvim-linux64.tar.gz
-  sudo mv nvim-linux64/bin/nvim /usr/local/bin/
-  rm -r nvim-linux64
+  rm nvim-linux64.tar.gz
 
-  # Install dependencies for markdown-preview.nvim
-  nvim +"call mkdp#util#install()" +qall
+  mkdir -p ~/.local/share
+  mv nvim-linux64 ~/.local/share/nvim-linux64
+  ln -sf ~/.local/share/nvim-linux64/bin/nvim ~/.local/bin/nvim
 }
 
 install_tmux() {
@@ -40,9 +40,6 @@ install_zsh() {
   # Script overwrites existing .zshrc file, so we replace with old .zshrc
   rm ~/.zshrc
   mv ~/.zshrc.pre-oh-my-zsh ~/.zshrc
-
-  # Install powerlevel10k theme
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
   # Install zsh-autosuggestion plugin
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

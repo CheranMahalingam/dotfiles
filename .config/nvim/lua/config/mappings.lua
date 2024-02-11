@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>bd!<cr>")
 vim.keymap.set("n", "<leader>re", "<cmd>:noh<cr>")
 
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fm", "<cmd>Telescope man_pages<cr>")
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>")

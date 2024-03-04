@@ -26,9 +26,8 @@ vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.cino = "N-s,g0,l1"
 vim.opt.splitbelow = true -- new windows below current
 vim.opt.splitright = true -- new windows right of current
-vim.opt.textwidth = 80
 vim.opt.updatetime = 200
 vim.opt.swapfile = false
 
-vim.o.sessionoptions="blank,buffers,curdir,help,tabpages,winsize,winpos,localoptions"
+vim.o.sessionoptions="blank,buffers,curdir,winsize,winpos"
 

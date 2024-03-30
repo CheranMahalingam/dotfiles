@@ -1,10 +1,12 @@
 local M = {
   "anuvyklack/hydra.nvim",
   event = "VeryLazy",
-  
+
   dependencies = {
     "mfussenegger/nvim-dap",
     "nvim-telescope/telescope.nvim",
+    "sindrets/diffview.nvim",
+    "aaronhallaert/advanced-git-search.nvim",
   },
 }
 
@@ -14,7 +16,6 @@ function M.config()
   local dap = require('dap')
   local dap_ui = require('dap.ui.widgets')
   local gitsigns = require('gitsigns')
-  local diffview = require('diffview')
 
   local dap_hint = [[
    ^ ^ Navigation      ^ ^     Action           ^ ^       UI      
@@ -32,10 +33,9 @@ function M.config()
    ^ ^    DiffView       ^ ^               Actions               
    ^-^----------------   ^-^-----------------^-^-----------------
    _h_: file history     _n_: next hunk      _u_: undo stage hunk
-   _H_: branch history   _p_: prev hunk      _b_: blame line     
-   _o_: staged diff      _s_: stage hunk     _B_: blame full
-   _O_: diff revision    _S_: stage buffer   _d_: toggle deleted
-   _c_: close diff
+   _o_: staged diff      _p_: prev hunk      _b_: blame line     
+   _O_: diff revision    _s_: stage hunk     _B_: blame full
+   _c_: close diff       _S_: stage buffer   _d_: toggle deleted
 
    _q_: quit
   ]]
@@ -133,26 +133,9 @@ function M.config()
       {'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame full' }},
       {'c', cmd 'DiffviewClose', { desc = 'close diff' }},
       {'h', cmd 'DiffviewFileHistory %', { exit = true, desc = 'file history' }},
-      {'H', cmd 'DiffviewFileHistory', { exit = true, desc = 'branch history' }},
       {'o', cmd 'DiffviewOpen', { exit = true, desc = 'curr diff' }},
-      {'O', function()
-        local actions = require("telescope.actions")
-        local action_state = require("telescope.actions.state")
-        local builtin = require("telescope.builtin")
-
-        local opts = {
-          attach_mappings = function(prompt_bufnr)
-            actions.select_default:replace(function()
-              actions.close(prompt_bufnr)
-              local selection = action_state.get_selected_entry()
-              vim.cmd('DiffviewOpen ' .. selection.value)
-            end)
-            return true
-          end,
-        }
-        builtin.git_commits(opts)
-      end, { exit = true, desc = 'diff rev' }},
-      {'q', nil, { exit = true, nowait = true, desc = 'quit' }}
+      {'O', cmd 'AdvancedGitSearch search_log_content_file', { exit = true, desc = 'diff revision' }},
+      {'q', nil, { exit = true, nowait = true, desc = 'quit' }},
     }
   })
 end

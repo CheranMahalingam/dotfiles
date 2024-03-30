@@ -21,11 +21,7 @@ vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_gre
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fm", "<cmd>Telescope man_pages<cr>")
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope resume<cr>")
-vim.keymap.set("n", "<leader>fgs", "<cmd>Telescope git_status<cr>")
-vim.keymap.set("n", "<leader>fgc", "<cmd>Telescope git_commits<cr>")
-vim.keymap.set("n", "<leader>fgb", "<cmd>Telescope git_branches<cr>")
-vim.keymap.set("n", "<leader>fgh", "<cmd>Telescope git_bcommits<cr>")
-vim.keymap.set("n", "<leader>fga", "<cmd>Telescope git_stash<cr>")
+vim.keymap.set("n", "<leader>fc", "<cmd>Telescope git_commits<cr>")
 
 vim.keymap.set("t", "jj", "<C-\\><C-n>")
 vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h")

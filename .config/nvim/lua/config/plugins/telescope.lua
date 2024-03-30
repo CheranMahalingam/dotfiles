@@ -6,6 +6,8 @@ local M = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "folke/trouble.nvim",
     { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+    "aaronhallaert/advanced-git-search.nvim",
+    "tpope/vim-fugitive",
   },
 }
 
@@ -15,6 +17,7 @@ function M.config()
   local trouble = require("trouble.providers.telescope")
 
   telescope.load_extension("live_grep_args")
+  telescope.load_extension("advanced_git_search")
 
   telescope.setup({
     defaults = {

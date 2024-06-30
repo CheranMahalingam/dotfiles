@@ -29,6 +29,9 @@ function M.config()
         },
       },
     },
+    plugins = {
+      delete_hidden_buffers = false,
+    },
   })
 end
 

@@ -14,7 +14,7 @@ local M = {
 function M.config()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
-  local trouble = require("trouble.providers.telescope")
+  local trouble = require("trouble.sources.telescope")
 
   telescope.load_extension("live_grep_args")
   telescope.load_extension("advanced_git_search")
@@ -35,7 +35,7 @@ function M.config()
           ["<M-d>"] = actions.delete_buffer,
 
           ["<C-q>"] = actions.send_selected_to_qflist,
-          ["<C-t>"] = trouble.open_with_trouble,
+          ["<C-t>"] = trouble.open,
         },
         n = {
           ["<Esc>"] = actions.close,

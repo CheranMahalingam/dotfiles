@@ -1,6 +1,5 @@
-local M = {
+return {
   "folke/flash.nvim",
-  event = "VeryLazy",
   keys = {
     {
       "s",
@@ -32,26 +31,5 @@ local M = {
       end,
       desc = "Remote Flash",
     },
-    {
-      "R",
-      mode = { "o", "x" },
-      function()
-        require("flash").treesitter_search()
-      end,
-      desc = "Flash Treesitter Search",
-    },
   },
 }
-
-function M.config()
-  require("flash").setup({
-    modes = {
-      search = {
-        enabled = false,
-      }
-    },
-  })
-end
-
-return M
-

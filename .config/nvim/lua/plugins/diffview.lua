@@ -2,12 +2,12 @@ return {
   "sindrets/diffview.nvim",
   keys = {
     {
-      "<leader>do",
+      "<leader>vo",
       "<cmd>DiffviewOpen<CR>",
       desc = "View Diff Against Head",
     },
     {
-      "<leader>dc",
+      "<leader>vc",
       "<cmd>DiffviewClose<CR>",
       desc = "Close Diff",
     },

@@ -6,13 +6,16 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    "saadparwaiz1/cmp_luasnip",
+    "L3MON4D3/LuaSnip",
+    "rafamadriz/friendly-snippets",
   },
   config = function()
     local cmp_status_ok, cmp = pcall(require, 'cmp')
     if not cmp_status_ok then
         return
     end
+
+    local luasnip = require('luasnip')
 
     local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -111,12 +114,10 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-          elseif luasnip.expandable() then
-            luasnip.expand()
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
-          elseif check_backspace() then
-            fallback()
+          elseif has_words_before() then
+            cmp.complete()
           else
             fallback()
           end
@@ -139,7 +140,7 @@ return {
       },
       snippet = {
         expand = function(args)
-          require("luasnip").lsp_expand(args.body)
+          luasnip.lsp_expand(args.body)
         end,
       },
       sources = {
@@ -149,6 +150,11 @@ return {
         { name = "buffer", priority = 50, max_item_count = 5 },
         { name = "nvim_lsp_signature_help", priority = 50 },
       },
+    })
+
+    -- Disable annoying completions in dap windows.
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+      sources = {},
     })
   end,
 }

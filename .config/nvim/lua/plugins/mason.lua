@@ -19,6 +19,10 @@ M.tools = {
   "typescript-language-server",
   "zls",
 
+  -- Debug Adapters
+  "codelldb",
+  "delve",
+
   -- Linters
   "cmakelint",
   "cpplint",

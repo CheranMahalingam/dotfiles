@@ -1,11 +1,4 @@
-alias rm="rm -r"
-
 alias map="xargs -n1"
-
-alias lg="lazygit"
-alias lzd="lazydocker"
-
-alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 alias k="kubectl"
 alias kg="kubectl get"
@@ -15,4 +8,3 @@ alias krm="kubectl delete"
 alias kl="kubectl logs"
 alias keti="kubectl exec -ti"
 alias kc="kubectl config"
-

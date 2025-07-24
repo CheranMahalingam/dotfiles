@@ -27,10 +27,11 @@ return {
       map(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
       map(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
       map(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      map(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
       map(bufnr, "n", "gr", "<cmd>Trouble lsp_references<CR>", opts)
       map(bufnr, "n", "gy", "<cmd>Trouble lsp_type_definitions<CR>", opts)
       map(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-      map(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+      map(bufnr, "n", "gt", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
       map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       map(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     end
@@ -68,9 +69,7 @@ return {
 
     -- Should match LSPs defined in mason.lua
     local servers = {
-      "clangd",
       "cmake",
-      "elixirls",
       "gopls",
       "hls",
       "marksman",
@@ -88,5 +87,16 @@ return {
         end,
       })
     end
+
+    nvim_lsp["clangd"].setup({
+      init_options = {
+        fallbackFlags = {'--std=c++23'}
+      },
+      on_attach = on_attach,
+      capabilities = capabilities,
+      root_dir = function()
+        return vim.fn.getcwd()
+      end,
+    })
   end,
 }

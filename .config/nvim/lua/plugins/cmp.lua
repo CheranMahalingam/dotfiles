@@ -111,32 +111,32 @@ return {
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<CR>"] = cmp.mapping.confirm { select = true },
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, {
-          "i",
-          "s",
-        }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, {
-          "i",
-          "s",
-        }),
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     cmp.select_next_item()
+        --   elseif luasnip.expand_or_jumpable() then
+        --     luasnip.expand_or_jump()
+        --   elseif has_words_before() then
+        --     cmp.complete()
+        --   else
+        --     fallback()
+        --   end
+        -- end, {
+        --   "i",
+        --   "s",
+        -- }),
+        -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+        --   if cmp.visible() then
+        --     cmp.select_prev_item()
+        --   elseif luasnip.jumpable(-1) then
+        --     luasnip.jump(-1)
+        --   else
+        --     fallback()
+        --   end
+        -- end, {
+        --   "i",
+        --   "s",
+        -- }),
       },
       snippet = {
         expand = function(args)
@@ -146,14 +146,14 @@ return {
       sources = {
         { name = "nvim_lsp", priority = 50 },
         { name = "luasnip", priority = 100 },
-        { name = "path", priority = 99 },
+        { name = "path", priority = 100 },
         { name = "buffer", priority = 50, max_item_count = 5 },
         { name = "nvim_lsp_signature_help", priority = 50 },
       },
     })
 
-    -- Disable annoying completions in dap windows.
-    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    -- Disable annoying completions in dap windows and telescope prompts.
+    cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover", "TelescopePrompt" }, {
       sources = {},
     })
   end,

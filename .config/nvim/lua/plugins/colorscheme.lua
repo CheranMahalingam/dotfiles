@@ -7,7 +7,7 @@ return {
       require("tokyonight").setup({
         style = "night",
         light_style = "day",
-	styles = {
+	      styles = {
           comments = { italic = false },
           keywords = { italic = false },
         },

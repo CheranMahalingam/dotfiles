@@ -10,7 +10,6 @@ M.tools = {
   -- LSPs
   "clangd",
   "cmake-language-server",
-  "elixir-ls",
   "gopls",
   "haskell-language-server",
   "marksman",
@@ -29,6 +28,7 @@ M.tools = {
   "eslint_d",
   "flake8",
   "hadolint",
+  "hlint",
   "mypy",
   "shellcheck",
   "yamllint",
@@ -37,6 +37,7 @@ M.tools = {
   "black",
   "clang-format",
   "isort",
+  "ormolu",
   "prettier",
   "yamlfmt",
 }

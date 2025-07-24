@@ -2,7 +2,7 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "mdx" },
   callback = function()
-    -- vim.cmd("set tw=100 wrap")
+    vim.cmd("set tw=80 wrap")
     vim.opt_local.wrap = true
   end,
 })

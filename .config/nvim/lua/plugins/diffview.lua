@@ -1,10 +1,11 @@
 return {
   "sindrets/diffview.nvim",
+  lazy = false,
   keys = {
     {
-      "<leader>vo",
-      "<cmd>DiffviewOpen<CR>",
-      desc = "View Diff Against Head",
+      "<leader>vf",
+      "<cmd>DiffviewFileHistory %<CR>",
+      desc = "View File History",
     },
     {
       "<leader>vc",

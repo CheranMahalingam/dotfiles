@@ -67,7 +67,6 @@ return {
       virtual_text = false,
     })
 
-    -- Should match LSPs defined in mason.lua
     local servers = {
       "cmake",
       "gopls",
@@ -79,7 +78,7 @@ return {
       "zls",
     }
     for _, lsp in ipairs(servers) do
-      nvim_lsp[lsp].setup({
+      vim.lsp.config(lsp, {
         on_attach = on_attach,
         capabilities = capabilities,
         root_dir = function()
@@ -88,7 +87,7 @@ return {
       })
     end
 
-    nvim_lsp["clangd"].setup({
+    vim.lsp.config("clangd", {
       init_options = {
         fallbackFlags = {'--std=c++23'}
       },

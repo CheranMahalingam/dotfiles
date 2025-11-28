@@ -36,3 +36,13 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 
 -- buffers
 map("n", "<leader>x", "<cmd>bd!<cr>", { desc = "Delete Buffer" })
+
+-- qflist
+map("n", "<leader>tt", function() require("config.utils").toggle_qflist() end, { desc = "Toggle Quickfix List" })
+map("n", "<leader>tw", function() vim.diagnostic.setqflist() end, { desc = "List Workspace Diagnostics" })
+map("n", "<leader>td", function()
+  local diagnostics = vim.diagnostic.get(0)
+  local qflist = vim.diagnostic.toqflist(diagnostics)
+  vim.fn.setqflist(qflist, 'r')
+  vim.cmd("copen")
+end, { desc = "List Buffer Diagnostics" })
